@@ -1,0 +1,33 @@
+﻿@model List<Animal>
+@{
+    ViewData["Title"] = "ZooPark";
+}
+
+<h1>ZooPark</h1>
+
+<a asp-action="Create">Add an animal to the Zoo</a>
+
+<table>
+    <thead>
+        <hr />
+    <td>Animal</td>
+    <td>Species</td>
+    <td>CalledByName</td>
+    <td>Quantity</td>
+
+    </thead>
+    <tbody>
+        @foreach (Animal animal in Model)
+        {
+            <tr>
+                <td>@animal.AnimalName</td>
+                <td>@animal.Species</td>
+                <td>@animal.CalledByName</td>
+                <td>@animal.Quantity</td>
+            </tr>
+
+        }
+
+    </tbody>
+
+</table>
