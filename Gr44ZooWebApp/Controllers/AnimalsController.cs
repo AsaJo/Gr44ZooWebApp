@@ -1,7 +1,9 @@
-﻿using Gr44ZooWebApp.Models.Repos;
+﻿using Gr44ZooWebApp.Models;
+using Gr44ZooWebApp.Models.Repos;
 using Gr44ZooWebApp.Models.Servises;
 using Gr44ZooWebApp.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 
 namespace Gr44ZooWebApp.Controllers
@@ -30,7 +32,7 @@ namespace Gr44ZooWebApp.Controllers
             if (ModelState.IsValid)
             {
 
-                try// STEP2 
+                try// STEP1 
                 {
                     _animalsService.Create(createAnimal);
                 }
@@ -45,6 +47,15 @@ namespace Gr44ZooWebApp.Controllers
                 return RedirectToAction(nameof(ZooPark));
             }
             return View(createAnimal);
+        }
+        public  IActionResult Details(int id)
+        {
+            Animal animal = _animalsService.FindById(id);
+            if(animal == null)
+            {
+                return RedirectToAction(nameof(ZooPark));
+            }
+            return View(animal);
         }
     }
 }
