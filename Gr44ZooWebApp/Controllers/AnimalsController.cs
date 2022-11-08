@@ -1,5 +1,6 @@
 ﻿using Gr44ZooWebApp.Models.Repos;
 using Gr44ZooWebApp.Models.Servises;
+using Gr44ZooWebApp.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gr44ZooWebApp.Controllers
@@ -14,7 +15,23 @@ namespace Gr44ZooWebApp.Controllers
         }
         public IActionResult ZooPark()
         {
-            return View();
+            return View(_animalsService.GetAll());
+        }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View(new CreateAnimalViewModel());
+        }
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public IActionResult Create(CreateAnimalViewModel createAnimal)
+        {
+            if (ModelState.IsValid)
+            {
+                _animalsService.Create(createAnimal);
+                return RedirectToAction(nameof(ZooPark));
+            }
+            return View(createAnimal);
         }
     }
 }
