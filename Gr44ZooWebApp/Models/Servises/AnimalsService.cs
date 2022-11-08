@@ -12,6 +12,9 @@ namespace Gr44ZooWebApp.Models.Servises
         }
         public Animal Create(CreateAnimalViewModel createAnimal)
         {
+            if (string.IsNullOrWhiteSpace(createAnimal.AnimalName)|| string.IsNullOrWhiteSpace(createAnimal.Species)|| string.IsNullOrWhiteSpace(createAnimal.CalledByName))
+            { throw new ArgumentException("AnimalName, Species,CalledByName Not allowed whitespace"); }
+
             Animal animal = new Animal()
             {
                 AnimalName = createAnimal.AnimalName,

@@ -2,6 +2,7 @@
 using Gr44ZooWebApp.Models.Servises;
 using Gr44ZooWebApp.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Gr44ZooWebApp.Controllers
 {
@@ -28,7 +29,19 @@ namespace Gr44ZooWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                _animalsService.Create(createAnimal);
+
+                try// STEP2 
+                {
+                    _animalsService.Create(createAnimal);
+                }
+                catch (ArgumentException exception)
+                {
+                    // Add our own message
+                    ModelState.AddModelError("Animal & species", exception.Message);// Key And value
+                    return View(createAnimal);
+                }
+
+
                 return RedirectToAction(nameof(ZooPark));
             }
             return View(createAnimal);
