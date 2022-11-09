@@ -57,7 +57,7 @@ namespace Gr44ZooWebApp.Controllers
             }
             return View(animal);
         }
-
+        //************************ Used for AJAX  ***************************************
         public IActionResult LastAnimalArrivel()
         {
         
@@ -66,8 +66,29 @@ namespace Gr44ZooWebApp.Controllers
             {
                 return PartialView("_AnimalRow", animal);
             }
-            return NotFound();
+            return NotFound();// for Fun 418 normal use 404 
 
         }
+        public IActionResult LastAnimalArrivelJSON() // getLastAnimalJSON
+        {
+            Animal animal = _animalsService.LastAdded();
+            if (animal != null)
+            {
+                return Json(animal);
+            }
+            return NotFound();//404 /418
+        }
+        public IActionResult AjaxAnimalList()
+        {
+            List<Animal> animal = _animalsService.GetAll();
+            if (animal != null)
+            {
+                return PartialView("_AnimalList", animal);
+
+            }
+            return BadRequest();
+
+        }
+
     }
 }
