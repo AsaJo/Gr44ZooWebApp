@@ -12,7 +12,7 @@ namespace Gr44ZooWebApp.Models.Servises
         }
         public Animal Create(CreateAnimalViewModel createAnimal)
         {
-            if (string.IsNullOrWhiteSpace(createAnimal.AnimalName)|| string.IsNullOrWhiteSpace(createAnimal.Species)|| string.IsNullOrWhiteSpace(createAnimal.CalledByName))
+            if (string.IsNullOrWhiteSpace(createAnimal.AnimalName) || string.IsNullOrWhiteSpace(createAnimal.Species) || string.IsNullOrWhiteSpace(createAnimal.CalledByName))
             { throw new ArgumentException("AnimalName, Species,CalledByName Not allowed whitespace"); }
 
             Animal animal = new Animal()
@@ -49,5 +49,16 @@ namespace Gr44ZooWebApp.Models.Servises
         {
             throw new NotImplementedException();
         }
+        public Animal? LastAdded()
+        {
+            List<Animal> animals = _animalsRepo.GetAll();
+            if(animals.Count < 1)// try with == 0
+            {
+                return null;
+            }
+            return animals.Last();
+        }
+        
+
     }
 }
