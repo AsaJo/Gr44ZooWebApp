@@ -1,15 +1,23 @@
 ﻿using Gr44ZooWebApp.Models;
+using Gr44ZooWebApp.Models.Repos;
+using Gr44ZooWebApp.Models.Servises;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace Gr44ZooWebApp.Controllers
 {
+
     public class HomeController : Controller
     {
+        private readonly IAnimalsService _animalsService;
+        public HomeController()
+        {
+            _animalsService = new AnimalsService(new InMemoryRepo());
+        }
 
         public IActionResult Index()
         {
-            return View();
+            return View(_animalsService.LastAdded());
         }
 
         public IActionResult Privacy()
