@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<h1>Veterinary</h1>
+
+
+<button onclick="getLastAnimal('@Url.Action("LastAnimalArrivel","Animals")')">Last Animal arrivel with Ajax</button>
+<button onclick="getLastAnimal('@Url.Action("LastAnimalArrivelJSON","Animals")')">Last Animal arrivel with JSON</button>
+<button onclick="getAnimalList('@Url.Action("AjaxAnimalList","Animals")')">Last Animal arrived with JSON with Ajax</button>
+<div id="result"></div>
+
