@@ -3,7 +3,7 @@
     ViewData["Title"] = "ZooPark";
 }
 
-<h1>ZooPark</h1>
+<h1>Zoo Park</h1>
 
 <a asp-action="Create">Add an animal to the Zoo</a>
 
@@ -42,7 +42,7 @@
 </div>
 @foreach (Animal animal in Model)
 {
-    <div class="row">
+@*    <div class="row">
 
         <div class="col-3">@animal.AnimalName</div>
         <div class="col-3">@animal.Species</div>
@@ -50,6 +50,7 @@
         <div class="col-3">@animal.Quantity</div>
         <div>@Html.ActionLink("Details","Details","Animals", new {id = animal.Id})</div>
 
-    </div>
+    </div>*@
+    <partial name="_AnimalRow" model="animal"></partial>
 
 }

@@ -57,5 +57,17 @@ namespace Gr44ZooWebApp.Controllers
             }
             return View(animal);
         }
+
+        public IActionResult LastAnimalArrivel()
+        {
+        
+            Animal animal = _animalsService.LastAdded();
+            if(animal != null)
+            {
+                return PartialView("_AnimalRow", animal);
+            }
+            return NotFound();
+
+        }
     }
 }
