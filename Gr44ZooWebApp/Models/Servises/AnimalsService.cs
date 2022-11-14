@@ -1,5 +1,6 @@
 ﻿using Gr44ZooWebApp.Models.Repos;
 using Gr44ZooWebApp.Models.ViewModels;
+using System;
 
 namespace Gr44ZooWebApp.Models.Servises
 {
@@ -45,9 +46,11 @@ namespace Gr44ZooWebApp.Models.Servises
             throw new NotImplementedException();
         }
 
-        public void Remove(int id)
+        public bool Remove(int id)
         {
-            throw new NotImplementedException();
+            Animal adnimalDelete= _animalsRepo.GetById(id);
+            bool success = _animalsRepo.Delete(adnimalDelete);
+            return success;
         }
         public Animal? LastAdded()
         {

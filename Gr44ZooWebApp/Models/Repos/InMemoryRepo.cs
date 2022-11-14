@@ -54,9 +54,9 @@
             }
         }
 
-        public void Delete(Animal animal)
+        public bool Delete(Animal animal)
         {
-            if(animal != null) { animalsList.Remove(animal); }  
+            return animalsList.Remove(animal);  
         }
     }
 }
