@@ -9,7 +9,7 @@ namespace Gr44ZooWebApp.Models.Servises
         List<Animal> FindBySpecies(string species);
         Animal FindById(int id);
         void Edit(int id, CreateAnimalViewModel editAnimal);
-        void Remove(int id);
+        bool Remove(int id);
         Animal LastAdded();
     }
 }

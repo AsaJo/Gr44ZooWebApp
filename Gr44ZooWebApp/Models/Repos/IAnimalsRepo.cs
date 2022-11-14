@@ -16,7 +16,7 @@
         void Update(Animal animal);
 
         // D
-        void Delete(Animal animal);
+        bool Delete(Animal animal);
       
     }
 }

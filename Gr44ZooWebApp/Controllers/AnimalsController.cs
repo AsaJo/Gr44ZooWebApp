@@ -57,6 +57,16 @@ namespace Gr44ZooWebApp.Controllers
             }
             return View(animal);
         }
+
+        public IActionResult Delete(int id)
+        {
+            Animal animal = _animalsService.FindById(id);
+            if (_animalsService.Remove(id))
+            {
+                return PartialView("_AnimalList", _animalsService.GetAll());
+            }
+            return NotFound();
+        }
         //************************ Used for AJAX  ***************************************
         public IActionResult LastAnimalArrivel()
         {
@@ -89,6 +99,36 @@ namespace Gr44ZooWebApp.Controllers
             return BadRequest();
 
         }
+        public IActionResult AnimalDetails(int id)
+        {
+            Animal animal = _animalsService.FindById(id);
+            if (animal != null)
+            {
+                return PartialView("_AnimalRow", animal);
+            }
+            return View(animal);
+        }
+        public IActionResult AnimalSpecies(string species)
+        {
+            List<Animal> animal = _animalsService.FindBySpecies(species);
+            if (animal != null)
+            {
+                return PartialView("_AnimalList", animal);
+
+            }
+            return BadRequest();
+
+        }
+        public IActionResult DeleteAnimalAjax(int id)
+        {
+            Animal animal = _animalsService.FindById(id);
+            if (_animalsService.Remove(id))
+            {
+                return PartialView("_AnimalList", _animalsService.GetAll());
+            }
+            return NotFound();
+        }
+
 
     }
 }
