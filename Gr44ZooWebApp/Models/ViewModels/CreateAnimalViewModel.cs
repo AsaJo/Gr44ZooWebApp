@@ -20,7 +20,7 @@ namespace Gr44ZooWebApp.Models.ViewModels
             {
                 return new List<string>
 
-                { "Mammal", "reptile", "Fishes","insects","birds"," spineless" };
+                { "Mammal", "Reptile", "Fishes","Insects","Birds"," Spineless" };
             }
         }
     }
