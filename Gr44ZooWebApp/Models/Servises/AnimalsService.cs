@@ -43,14 +43,27 @@ namespace Gr44ZooWebApp.Models.Servises
 
         public void Edit(int id, CreateAnimalViewModel editAnimal)
         {
-            throw new NotImplementedException();
+            Animal animal = _animalsRepo.GetById(id);
+
+            if (animal != null)
+            {
+                animal.AnimalName = editAnimal.AnimalName;
+                animal.Species = editAnimal.Species;
+                animal.CalledByName = editAnimal.CalledByName;
+                animal.Quantity = editAnimal.Quantity;
+
+
+                _animalsRepo.Update(animal);
+            }
         }
 
-        public bool Remove(int id)
+        public void Remove(int id)
         {
-            Animal adnimalDelete= _animalsRepo.GetById(id);
-            bool success = _animalsRepo.Delete(adnimalDelete);
-            return success;
+            Animal animal = _animalsRepo.GetById(id);
+            if (animal != null)
+            {
+                _animalsRepo.Delete(animal);
+            }
         }
         public Animal? LastAdded()
         {
