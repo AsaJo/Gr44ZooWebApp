@@ -12,9 +12,9 @@ namespace Gr44ZooWebApp.Controllers
     public class AnimalsController : Controller
     {
         IAnimalsService _animalsService;
-        public AnimalsController()
+        public AnimalsController(IAnimalsService animalsService)
         {
-            _animalsService = new AnimalsService(new InMemoryRepo());
+            _animalsService = animalsService;
         }
         public IActionResult ZooPark()
         {
@@ -60,13 +60,18 @@ namespace Gr44ZooWebApp.Controllers
 
         public IActionResult Delete(int id)
         {
-            Animal animal = _animalsService.FindById(id);
-            if (_animalsService.Remove(id))
-            {
-                return PartialView("_AnimalList", _animalsService.GetAll());
+            
+                Animal animal = _animalsService.FindById(id);
+                if (animal != null)
+                {
+                    _animalsService.Remove(id);
+                }
+                else
+                {
+                    return RedirectToAction(nameof(ZooPark));
+                }
+                return View();
             }
-            return NotFound();
-        }
         //************************ Used for AJAX  ***************************************
         public IActionResult LastAnimalArrivel()
         {
@@ -122,11 +127,15 @@ namespace Gr44ZooWebApp.Controllers
         public IActionResult DeleteAnimalAjax(int id)
         {
             Animal animal = _animalsService.FindById(id);
-            if (_animalsService.Remove(id))
+            if (animal != null)
             {
-                return PartialView("_AnimalList", _animalsService.GetAll());
+                _animalsService.Remove(id);
             }
-            return NotFound();
+            else
+            {
+                return RedirectToAction(nameof(ZooPark));
+            }
+            return View();
         }
 
 

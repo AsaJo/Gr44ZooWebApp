@@ -7,5 +7,6 @@
     <div class="col-3">@Model.CalledByName</div>
     <div class="col-3">@Model.Quantity</div>
     <div>@Html.ActionLink("Details","Details","Animals", new {id = Model.Id})</div>
+    <div>@Html.ActionLink("Delete","Delete","Animals", new {id = Model.Id})</div>
 
 </div>

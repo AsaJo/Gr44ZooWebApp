@@ -1,6 +1,19 @@
+using Gr44ZooWebApp.Data;
+using Gr44ZooWebApp.Models.Repos;
+using Gr44ZooWebApp.Models.Servises;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddDbContext<ZooDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+//builder.Services.AddScoped<IAnimalsRepo, InMemoryRepo>();// IoC & DI
+builder.Services.AddScoped<IAnimalsRepo, DataBaseAnimalsRepo>();// IoC & DI
+builder.Services.AddScoped<IAnimalsService, AnimalsService>();// IoC & DI
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddMvc();
 
