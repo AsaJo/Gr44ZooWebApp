@@ -12,7 +12,9 @@ namespace Gr44ZooWebApp.Models.Repos
 
         public Animal Create(Animal animal)
         {
-            throw new NotImplementedException();
+          _zooDbContext.Add(animal);
+           _zooDbContext.SaveChanges();
+            return animal;
         }
 
 
@@ -23,21 +25,23 @@ namespace Gr44ZooWebApp.Models.Repos
 
         public Animal GetById(int id)
         {
-            throw new NotImplementedException();
+            return _zooDbContext.Animals.SingleOrDefault(animal => animal.Id == id);
         }
 
         public List<Animal> GetBySpecies(string species)
         {
-            throw new NotImplementedException();
+            return _zooDbContext.Animals.Where(animal => animal.Species.Contains(species)).ToList();
         }
 
         public void Update(Animal animal)
         {
-            throw new NotImplementedException();
+            _zooDbContext.Update(animal);
+            _zooDbContext.SaveChanges();    
         }
         public void Delete(Animal animal)
         {
-            throw new NotImplementedException();
+            _zooDbContext.Remove(animal);
+            _zooDbContext.SaveChanges();
         }
     }
 }

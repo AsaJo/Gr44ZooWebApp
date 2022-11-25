@@ -10,9 +10,9 @@ namespace Gr44ZooWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly IAnimalsService _animalsService;
-        public HomeController()
+        public HomeController(IAnimalsService animalsService)
         {
-            _animalsService = new AnimalsService(new InMemoryRepo());
+            _animalsService = animalsService;
         }
 
         public IActionResult Index()
